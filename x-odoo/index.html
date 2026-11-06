@@ -55,6 +55,45 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
 @media(max-width:850px){.flowline{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.wysiwyg-hero{grid-template-columns:1fr}.flowline{grid-template-columns:1fr}.flowstep{min-height:0}}
 
+
+/* Interactive physical-world simulations */
+.sim-lab{margin-top:28px;border:1px solid #28505b;border-radius:15px;background:linear-gradient(145deg,#0b1d28,#06121a);padding:22px;overflow:hidden}
+.sim-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:17px}
+.sim-head h3{font-size:18px;margin:5px 0 0;letter-spacing:-.5px}
+.sim-head small{font:9px "DM Mono";color:var(--cyan);letter-spacing:1px}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.sim-card{border:1px solid #244451;border-radius:11px;background:#07151e;padding:16px;min-width:0}
+.sim-card-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.sim-card h4{font-size:12px;margin:0}.sim-state{font:9px "DM Mono";color:#8da7b2}.sim-state.ok{color:var(--lime)}
+.sim-stage{height:190px;position:relative;margin:14px 0 12px;border-radius:8px;overflow:hidden;background:linear-gradient(#0c202b,#091720);border:1px solid #1a3947}
+.sim-stage:after{content:"";position:absolute;left:0;right:0;bottom:32px;height:8px;background:repeating-linear-gradient(90deg,#34515e 0 18px,#142c38 18px 26px);border-radius:8px}
+.warehouse .rack{position:absolute;top:17px;left:7%;width:25%;height:105px;border:3px solid #345665;border-bottom:0;background:repeating-linear-gradient(0deg,transparent 0 31px,#345665 32px 35px)}
+.warehouse .rack:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 47%,#345665 48% 52%,transparent 53%)}
+.pallet{position:absolute;z-index:2;left:10%;bottom:41px;width:45px;height:38px;background:linear-gradient(135deg,#c48c48,#78502e);border:2px solid #e4b66e;border-radius:4px;transition:left 2.8s cubic-bezier(.5,0,.2,1)}
+.pallet:before,.pallet:after{content:"";position:absolute;top:7px;bottom:7px;width:2px;background:#f2ce91}.pallet:before{left:13px}.pallet:after{right:13px}
+.warehouse.running .pallet{left:75%}
+.scanner{position:absolute;z-index:3;left:48%;bottom:43px;width:30px;height:66px;border:2px solid #52f2dc;border-bottom:0;border-radius:7px 7px 0 0;opacity:.5}
+.scanner:after{content:"";position:absolute;left:-14px;right:-14px;top:19px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:scanbeam 1s infinite}
+@keyframes scanbeam{50%{opacity:.2;transform:translateY(19px)}}
+.machine{position:absolute;left:38%;top:24px;width:26%;height:98px;border:2px solid #386071;border-radius:8px;background:linear-gradient(145deg,#1a3b49,#0a1c26);display:grid;place-items:center;color:var(--cyan);font:10px "DM Mono"}
+.machine:after{content:"";position:absolute;bottom:-9px;left:12%;right:12%;height:8px;background:#34515e}
+.raw,.finished{position:absolute;z-index:2;bottom:42px;width:28px;height:28px;border-radius:4px;background:#bd8b4b;border:2px solid #e9bd75;left:9%;transition:all 2s}
+.finished{background:#52bca9;border-color:#8bffdf;opacity:0;left:78%;transform:scale(.6)}
+.production.running .raw{left:47%;opacity:0;transform:scale(.5)}
+.production.running .finished{opacity:1;transform:scale(1)}
+.robot{position:absolute;right:8%;top:27px;width:35px;height:65px;border-left:5px solid #6c9eff;border-top:5px solid #6c9eff;border-radius:18px 0 0 0;transform-origin:top left}
+.robot:after{content:"";position:absolute;right:-9px;top:-8px;width:18px;height:8px;background:#6c9eff;border-radius:4px;transform:rotate(25deg)}
+.production.running .robot{animation:robotwork 1.2s ease-in-out 2}
+@keyframes robotwork{50%{transform:rotate(-22deg)}}
+.sim-meta{display:flex;justify-content:space-between;gap:8px;font:9px "DM Mono";color:#8ca6b2}
+.sim-progress{height:4px;background:#1a3542;border-radius:5px;margin:12px 0;overflow:hidden}.sim-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--lime));transition:width .35s}
+.sim-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sim-btn{border:1px solid var(--cyan);background:#52f2dc;color:#06151a;border-radius:6px;padding:9px 13px;font:700 10px Manrope;cursor:pointer}
+.sim-btn:disabled{opacity:.5;cursor:wait}
+.sim-log{font:9px/1.6 "DM Mono";color:#a3bdc6;min-height:28px;margin-top:9px}
+.sim-foot{font:9px/1.8 "DM Mono";color:#708d99;margin-top:14px}
+@media(max-width:700px){.sim-grid{grid-template-columns:1fr}.sim-head{align-items:flex-start;flex-direction:column}}
+
 </style>
 </head>
 <body>
@@ -84,6 +123,27 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
 </div>
 <div class="loop-note"><strong style="color:var(--lime)">THE CLOSED LOOP</strong> — Odoo mengirim perintah, sistem lapangan mengeksekusi, perangkat memberi umpan balik, lalu Odoo memperbarui status berdasarkan hasil yang terverifikasi. Jika mesin gagal, barang tidak terbaca, atau hasil berbeda, exception muncul untuk ditangani — bukan diam-diam dianggap selesai.</div>
 </div>
+
+<div class="sim-lab reveal" id="simulation">
+ <div class="sim-head"><div><small>LIVE INTERACTION / SANDBOX</small><h3>See the physical workflow in motion.</h3></div><span class="pill">SIMULATED · NOT CONNECTED TO REAL MACHINES</span></div>
+ <div class="sim-grid">
+  <article class="sim-card">
+   <div class="sim-card-top"><h4>01 / Warehouse transfer</h4><span class="sim-state" id="warehouseState">READY · WH/Stock</span></div>
+   <div class="sim-stage warehouse" id="warehouseStage"><div class="rack"></div><div class="scanner"></div><div class="pallet"></div></div>
+   <div class="sim-meta"><span>WH/Stock</span><span>→</span><span>WH/Output</span></div><div class="sim-progress"><i id="warehouseProgress"></i></div>
+   <div class="sim-actions"><button class="sim-btn" id="warehouseRun">▶ Run transfer</button><span class="sim-meta" id="warehouseQty">1 pallet · 24 units</span></div>
+   <div class="sim-log" id="warehouseLog" aria-live="polite">Odoo: Internal Transfer created. Menunggu eksekusi.</div>
+  </article>
+  <article class="sim-card">
+   <div class="sim-card-top"><h4>02 / Manufacturing order</h4><span class="sim-state" id="productionState">READY · MO/00042</span></div>
+   <div class="sim-stage production" id="productionStage"><div class="machine">CNC / MACHINE</div><div class="robot"></div><div class="raw"></div><div class="finished"></div></div>
+   <div class="sim-meta"><span>RAW MATERIAL</span><span>→</span><span>FINISHED GOODS</span></div><div class="sim-progress"><i id="productionProgress"></i></div>
+   <div class="sim-actions"><button class="sim-btn" id="productionRun">▶ Start production</button><span class="sim-meta" id="productionQty">0 / 10 units</span></div>
+   <div class="sim-log" id="productionLog" aria-live="polite">Odoo: Work order confirmed. Menunggu start.</div>
+  </article>
+ </div>
+ <div class="sim-foot">SIMULATION ONLY — animasi ini menggambarkan alur digital dan fisik secara konseptual. Tidak mengirim perintah ke PLC, AGV, conveyor, mesin, atau database Odoo sungguhan.</div>
+</div>
 <div class="wysiwyg-foot reveal">REAL-WORLD PRINCIPLE: NO PHYSICAL CONFIRMATION, NO FALSE COMPLETION. Eksekusi otomatis memerlukan desain integrasi, perangkat yang kompatibel, safety interlock, otorisasi, dan prosedur operasional yang tepat.</div>
 </section>
 <section class="wrap" id="connected"><div class="section-head reveal"><div><div class="eyebrow">Intelligence meets reality</div><h2>Connect the physical.<br><span class="gradient">Automate the digital.</span></h2></div><p>Hubungkan sinyal dari perangkat dan mesin dengan proses ERP. x-Odoo mengubah event lapangan menjadi workflow, alert, maintenance, dan keputusan — serta mengirim instruksi dari ERP kembali ke perangkat untuk menjalankan pekerjaan fisik.</p></div><div class="grid3">
@@ -102,5 +162,27 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
 <script>
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+function runSequence(buttonId,stageId,stateId,progressId,logId,steps,doneLabel,qtyId,qtyDone){
+ const button=document.getElementById(buttonId),stage=document.getElementById(stageId),state=document.getElementById(stateId),bar=document.getElementById(progressId),log=document.getElementById(logId),qty=document.getElementById(qtyId);
+ let busy=false;
+ button.addEventListener('click',()=>{
+  if(busy)return;busy=true;button.disabled=true;button.textContent='⟳ Executing...';stage.classList.remove('running');void stage.offsetWidth;stage.classList.add('running');bar.style.width='0%';state.classList.remove('ok');state.textContent='IN PROGRESS';
+  let i=0;log.textContent=steps[0].text;qty.textContent=steps[0].qty||qtyDone[0];
+  const tick=()=>{i++;if(i<steps.length){bar.style.width=(i/(steps.length-1)*100)+'%';log.textContent=steps[i].text;qty.textContent=steps[i].qty||qtyDone[Math.min(i,qtyDone.length-1)];setTimeout(tick,steps[i].delay||850)}else{bar.style.width='100%';state.textContent=doneLabel;state.classList.add('ok');button.disabled=false;button.textContent='↻ Run again';busy=false}};
+  setTimeout(tick,steps[1].delay||850);
+ });
+}
+runSequence('warehouseRun','warehouseStage','warehouseState','warehouseProgress','warehouseLog',[
+ {text:'Odoo: Transfer validated. Instruction sent to warehouse terminal.',qty:'1 pallet · queued'},
+ {text:'HANDHELD: Operator scans pallet ID and destination bin.',qty:'1 pallet · scanning',delay:1000},
+ {text:'EXECUTION: Pallet moves to WH/Output. Sensor confirms arrival.',qty:'1 pallet · moved',delay:1100},
+ {text:'Odoo Inventory: Location updated. Transfer marked DONE.',qty:'24 units · confirmed',delay:1000}
+],'DONE · WH/Output',['1 pallet · 24 units']);
+runSequence('productionRun','productionStage','productionState','productionProgress','productionLog',[
+ {text:'Odoo: MO/00042 confirmed. BOM and work instructions dispatched.',qty:'0 / 10 units'},
+ {text:'SHOPFLOOR: Material issued. Machine cycle starts.',qty:'Material issued',delay:1000},
+ {text:'PLC: Processing cycle and quality checkpoint completed.',qty:'5 / 10 units',delay:1200},
+ {text:'Odoo Manufacturing: Output and material consumption synchronized.',qty:'10 / 10 units',delay:1200}
+],'DONE · 10/10',['0 / 10 units']);
 </script>
 </body></html>
