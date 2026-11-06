@@ -56,44 +56,69 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
 @media(max-width:560px){.wysiwyg-hero{grid-template-columns:1fr}.flowline{grid-template-columns:1fr}.flowstep{min-height:0}}
 
 
-/* Interactive physical-world simulations */
-.sim-lab{margin-top:28px;border:1px solid #28505b;border-radius:15px;background:linear-gradient(145deg,#0b1d28,#06121a);padding:22px;overflow:hidden}
-.sim-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:17px}
-.sim-head h3{font-size:18px;margin:5px 0 0;letter-spacing:-.5px}
-.sim-head small{font:9px "DM Mono";color:var(--cyan);letter-spacing:1px}
-.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.sim-card{border:1px solid #244451;border-radius:11px;background:#07151e;padding:16px;min-width:0}
-.sim-card-top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.sim-card h4{font-size:12px;margin:0}.sim-state{font:9px "DM Mono";color:#8da7b2}.sim-state.ok{color:var(--lime)}
-.sim-stage{height:190px;position:relative;margin:14px 0 12px;border-radius:8px;overflow:hidden;background:linear-gradient(#0c202b,#091720);border:1px solid #1a3947}
-.sim-stage:after{content:"";position:absolute;left:0;right:0;bottom:32px;height:8px;background:repeating-linear-gradient(90deg,#34515e 0 18px,#142c38 18px 26px);border-radius:8px}
-.warehouse .rack{position:absolute;top:17px;left:7%;width:25%;height:105px;border:3px solid #345665;border-bottom:0;background:repeating-linear-gradient(0deg,transparent 0 31px,#345665 32px 35px)}
-.warehouse .rack:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 47%,#345665 48% 52%,transparent 53%)}
-.pallet{position:absolute;z-index:2;left:10%;bottom:41px;width:45px;height:38px;background:linear-gradient(135deg,#c48c48,#78502e);border:2px solid #e4b66e;border-radius:4px;transition:left 2.8s cubic-bezier(.5,0,.2,1)}
-.pallet:before,.pallet:after{content:"";position:absolute;top:7px;bottom:7px;width:2px;background:#f2ce91}.pallet:before{left:13px}.pallet:after{right:13px}
-.warehouse.running .pallet{left:75%}
-.scanner{position:absolute;z-index:3;left:48%;bottom:43px;width:30px;height:66px;border:2px solid #52f2dc;border-bottom:0;border-radius:7px 7px 0 0;opacity:.5}
-.scanner:after{content:"";position:absolute;left:-14px;right:-14px;top:19px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:scanbeam 1s infinite}
-@keyframes scanbeam{50%{opacity:.2;transform:translateY(19px)}}
-.machine{position:absolute;left:38%;top:24px;width:26%;height:98px;border:2px solid #386071;border-radius:8px;background:linear-gradient(145deg,#1a3b49,#0a1c26);display:grid;place-items:center;color:var(--cyan);font:10px "DM Mono"}
-.machine:after{content:"";position:absolute;bottom:-9px;left:12%;right:12%;height:8px;background:#34515e}
-.raw,.finished{position:absolute;z-index:2;bottom:42px;width:28px;height:28px;border-radius:4px;background:#bd8b4b;border:2px solid #e9bd75;left:9%;transition:all 2s}
-.finished{background:#52bca9;border-color:#8bffdf;opacity:0;left:78%;transform:scale(.6)}
-.production.running .raw{left:47%;opacity:0;transform:scale(.5)}
-.production.running .finished{opacity:1;transform:scale(1)}
-.robot{position:absolute;right:8%;top:27px;width:35px;height:65px;border-left:5px solid #6c9eff;border-top:5px solid #6c9eff;border-radius:18px 0 0 0;transform-origin:top left}
-.robot:after{content:"";position:absolute;right:-9px;top:-8px;width:18px;height:8px;background:#6c9eff;border-radius:4px;transform:rotate(25deg)}
-.production.running .robot{animation:robotwork 1.2s ease-in-out 2}
-@keyframes robotwork{50%{transform:rotate(-22deg)}}
-.sim-meta{display:flex;justify-content:space-between;gap:8px;font:9px "DM Mono";color:#8ca6b2}
-.sim-progress{height:4px;background:#1a3542;border-radius:5px;margin:12px 0;overflow:hidden}.sim-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--lime));transition:width .35s}
-.sim-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.sim-btn{border:1px solid var(--cyan);background:#52f2dc;color:#06151a;border-radius:6px;padding:9px 13px;font:700 10px Manrope;cursor:pointer}
-.sim-btn:disabled{opacity:.5;cursor:wait}
-.sim-log{font:9px/1.6 "DM Mono";color:#a3bdc6;min-height:28px;margin-top:9px}
-.sim-foot{font:9px/1.8 "DM Mono";color:#708d99;margin-top:14px}
-@media(max-width:700px){.sim-grid{grid-template-columns:1fr}.sim-head{align-items:flex-start;flex-direction:column}}
 
+/* Premium industrial simulation stage — isometric / instrument-panel aesthetic */
+.sim-lab{margin-top:30px;padding:26px;border-radius:18px;background:linear-gradient(135deg,#0b1924 0%,#07121b 60%,#0b2029 100%);border:1px solid #244754;box-shadow:0 28px 90px #0007}
+.sim-head{margin-bottom:22px}.sim-head h3{font-size:21px;letter-spacing:-.8px}.sim-head small{letter-spacing:2px}
+.sim-grid{gap:16px}.sim-card{padding:17px;background:linear-gradient(155deg,#0c1b26,#07121a);border-color:#294653;border-radius:13px;box-shadow:inset 0 1px #ffffff08}
+.sim-card h4{font-size:12px;letter-spacing:.2px}.sim-state{padding:6px 9px;border:1px solid #294552;border-radius:5px;background:#0a1b25;font-size:8px;letter-spacing:.8px}
+.sim-stage{height:260px;margin:15px 0 13px;border-radius:9px;border-color:#24434f;background:radial-gradient(ellipse at 50% 45%,#122a36 0%,#081720 72%);isolation:isolate}
+.sim-stage:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.3;background-image:linear-gradient(#29495755 1px,transparent 1px),linear-gradient(90deg,#29495755 1px,transparent 1px);background-size:26px 26px}
+.sim-stage:after{height:1px;bottom:30px;background:#416170;opacity:.5;border-radius:0}
+.sim-meta{font-size:8px;letter-spacing:.7px;text-transform:uppercase}
+.sim-progress{height:3px;margin:14px 0 12px;background:#1a303c}
+.sim-btn{padding:10px 15px;border-radius:5px;font-size:9px;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 0 20px #52f2dc18}
+.sim-log{min-height:30px;color:#a9c2cb;font-size:9px}
+.sim-foot{margin-top:19px;padding-top:14px;border-top:1px solid #1d3742;letter-spacing:.3px}
+.wh-layout{position:absolute;inset:0;padding:16px 17px 39px}
+.wh-label{position:absolute;top:12px;left:14px;font:8px "DM Mono";letter-spacing:1px;color:#7895a3}
+.wh-location{position:absolute;top:12px;right:14px;font:8px "DM Mono";color:#8aa6b2}
+.wh-rack{position:absolute;top:49px;left:7%;width:25%;height:120px;border:1px solid #557180;background:linear-gradient(90deg,#203c49,#122b37);box-shadow:inset 0 0 0 5px #102631}
+.wh-rack:before,.wh-rack:after{content:"";position:absolute;left:0;right:0;height:1px;background:#72909b;top:38%;box-shadow:0 1px #10212b,0 2px #72909b}
+.wh-rack:after{top:70%}
+.wh-rack span{position:absolute;inset:9px;background:repeating-linear-gradient(90deg,#c18b4b 0 17px,transparent 17px 22px);opacity:.65}
+.wh-rack b{position:absolute;left:9px;right:9px;bottom:8px;height:17px;background:repeating-linear-gradient(90deg,#d5a66c 0 17px,transparent 17px 22px);opacity:.5}
+.wh-dock{position:absolute;right:8%;top:50px;width:25%;height:120px;border:1px dashed #5c7b88;background:#10263166}
+.wh-dock:before{content:"OUTBOUND / STAGING";position:absolute;top:8px;left:0;right:0;text-align:center;font:7px "DM Mono";letter-spacing:1px;color:#85a4b0}
+.wh-route{position:absolute;left:28%;right:25%;top:108px;height:55px;border-top:1px dashed #52f2dc66;border-bottom:1px dashed #52f2dc33;transform:skewY(-8deg)}
+.wh-route:after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:repeating-linear-gradient(90deg,#52f2dc 0 5px,transparent 5px 12px);animation:routeFlow 1s linear infinite}
+@keyframes routeFlow{to{background-position:24px 0}}
+.agv{position:absolute;z-index:4;left:29%;top:124px;width:66px;height:39px;border:1px solid #6b91a0;border-radius:7px;background:linear-gradient(145deg,#2b5362,#102631);box-shadow:0 8px 18px #0008;transition:left 3.3s cubic-bezier(.4,0,.2,1),top 3.3s}
+.agv:before{content:"";position:absolute;left:13px;right:13px;top:-13px;height:13px;border:1px solid #c69a5f;background:linear-gradient(90deg,#a9783e,#e2b66e);border-radius:2px 2px 0 0}
+.agv:after{content:"AGV · 07";position:absolute;inset:0;display:grid;place-items:center;font:7px "DM Mono";color:#c7f9f0;letter-spacing:.5px}
+.agv i{position:absolute;bottom:-4px;width:11px;height:6px;background:#02090d;border:1px solid #53717c;border-radius:4px}
+.agv i:first-child{left:8px}.agv i:last-child{right:8px}
+.warehouse.running .agv{left:69%;top:125px}
+.wh-beacon{position:absolute;z-index:3;left:48%;top:84px;width:2px;height:95px;background:linear-gradient(transparent,#52f2dc,transparent);opacity:0}
+.warehouse.running .wh-beacon{animation:beaconPulse 1s 1.2s 2}
+@keyframes beaconPulse{50%{opacity:1;box-shadow:0 0 18px #52f2dc}}
+.wh-readout{position:absolute;left:14px;bottom:9px;font:7px "DM Mono";color:#7895a3;letter-spacing:.7px}
+.wh-readout strong{color:#52f2dc;font-weight:400}
+.mfg-layout{position:absolute;inset:0}
+.mfg-topline{position:absolute;top:12px;left:14px;right:14px;display:flex;justify-content:space-between;font:8px "DM Mono";letter-spacing:1px;color:#85a1ad}
+.mfg-machine{position:absolute;left:35%;top:57px;width:36%;height:126px;border:1px solid #577987;border-radius:7px;background:linear-gradient(145deg,#1d3c49,#0b202b 70%);box-shadow:0 12px 35px #0008,inset 0 0 0 5px #122d39}
+.mfg-machine:before{content:"CNC / CELL 04";position:absolute;top:9px;left:0;right:0;text-align:center;font:8px "DM Mono";letter-spacing:1px;color:#9ab4bf}
+.mfg-window{position:absolute;left:13%;right:13%;top:30px;height:70px;border:1px solid #4b7b87;background:linear-gradient(145deg,#12313a,#07151e);overflow:hidden}
+.mfg-window:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#52f2dc18 50%,transparent 65%);transform:translateX(-100%)}
+.production.running .mfg-window:before{animation:machineScan 1.1s linear 3}
+@keyframes machineScan{to{transform:translateX(100%)}}
+.mfg-window:after{content:"";position:absolute;left:50%;top:18px;width:3px;height:37px;background:#9bbbc3;box-shadow:0 0 12px #52f2dc}
+.mfg-base{position:absolute;bottom:22px;left:15%;right:15%;height:8px;background:#486876;border-radius:2px}
+.mfg-conveyor{position:absolute;left:7%;right:7%;bottom:37px;height:20px;border:1px solid #42616e;background:repeating-linear-gradient(90deg,#243f4b 0 9px,#0d202b 9px 17px);border-radius:3px}
+.production.running .mfg-conveyor{animation:conveyorMove .25s linear infinite}
+@keyframes conveyorMove{to{background-position:17px 0}}
+.mfg-part{position:absolute;z-index:3;left:13%;bottom:60px;width:25px;height:25px;border:1px solid #e0b875;border-radius:3px;background:linear-gradient(145deg,#d4a15b,#80542f);box-shadow:0 4px 9px #0008;transition:left 2.2s ease,background .4s}
+.mfg-part:after{content:"";position:absolute;inset:5px;border:1px solid #f2d29a}
+.production.running .mfg-part{left:61%;background:linear-gradient(145deg,#74ddc9,#287b75);border-color:#a0ffeb}
+.mfg-arm{position:absolute;z-index:4;right:12%;top:47px;width:55px;height:75px}
+.mfg-arm:before{content:"";position:absolute;left:10px;top:0;width:12px;height:48px;border-radius:7px;background:linear-gradient(90deg,#6c9eff,#294b83);transform:rotate(24deg);transform-origin:bottom}
+.mfg-arm:after{content:"";position:absolute;left:0;top:40px;width:35px;height:11px;border-radius:6px;background:#6c9eff;transform:rotate(-24deg);transform-origin:left}
+.production.running .mfg-arm:before{animation:armUpper .8s ease-in-out 3}
+.production.running .mfg-arm:after{animation:armLower .8s ease-in-out 3}
+@keyframes armUpper{50%{transform:rotate(5deg)}}@keyframes armLower{50%{transform:rotate(22deg)}}
+.mfg-status{position:absolute;bottom:9px;left:14px;right:14px;display:flex;justify-content:space-between;font:7px "DM Mono";color:#7895a3;letter-spacing:.8px}
+.mfg-status strong{color:#52f2dc;font-weight:400}
+@media(max-width:700px){.sim-lab{padding:16px}.sim-stage{height:230px}.sim-head h3{font-size:18px}}
 </style>
 </head>
 <body>
@@ -129,14 +154,14 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
  <div class="sim-grid">
   <article class="sim-card">
    <div class="sim-card-top"><h4>01 / Warehouse transfer</h4><span class="sim-state" id="warehouseState">READY · WH/Stock</span></div>
-   <div class="sim-stage warehouse" id="warehouseStage"><div class="rack"></div><div class="scanner"></div><div class="pallet"></div></div>
+   <div class="sim-stage warehouse" id="warehouseStage"><div class="wh-layout"><div class="wh-label">DISTRIBUTION CENTER / ZONE A</div><div class="wh-location">AISLE 04 · DOCK 02</div><div class="wh-rack"><span></span><b></b></div><div class="wh-dock"></div><div class="wh-route"></div><div class="wh-beacon"></div><div class="agv"><i></i><i></i></div><div class="wh-readout">FLEET STATUS <strong>● ONLINE</strong>　 ROUTE A4 → D2</div></div></div>
    <div class="sim-meta"><span>WH/Stock</span><span>→</span><span>WH/Output</span></div><div class="sim-progress"><i id="warehouseProgress"></i></div>
    <div class="sim-actions"><button class="sim-btn" id="warehouseRun">▶ Run transfer</button><span class="sim-meta" id="warehouseQty">1 pallet · 24 units</span></div>
    <div class="sim-log" id="warehouseLog" aria-live="polite">Odoo: Internal Transfer created. Menunggu eksekusi.</div>
   </article>
   <article class="sim-card">
    <div class="sim-card-top"><h4>02 / Manufacturing order</h4><span class="sim-state" id="productionState">READY · MO/00042</span></div>
-   <div class="sim-stage production" id="productionStage"><div class="machine">CNC / MACHINE</div><div class="robot"></div><div class="raw"></div><div class="finished"></div></div>
+   <div class="sim-stage production" id="productionStage"><div class="mfg-layout"><div class="mfg-topline"><span>SHOPFLOOR / LINE 04</span><span>WORKCENTER CNC-04</span></div><div class="mfg-machine"><div class="mfg-window"></div><div class="mfg-base"></div></div><div class="mfg-arm"></div><div class="mfg-conveyor"></div><div class="mfg-part"></div><div class="mfg-status"><span>SPINDLE <strong>● READY</strong></span><span>QUALITY GATE <strong>ACTIVE</strong></span></div></div></div>
    <div class="sim-meta"><span>RAW MATERIAL</span><span>→</span><span>FINISHED GOODS</span></div><div class="sim-progress"><i id="productionProgress"></i></div>
    <div class="sim-actions"><button class="sim-btn" id="productionRun">▶ Start production</button><span class="sim-meta" id="productionQty">0 / 10 units</span></div>
    <div class="sim-log" id="productionLog" aria-live="polite">Odoo: Work order confirmed. Menunggu start.</div>
