@@ -60,13 +60,13 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
 /* Premium industrial simulation stage — isometric / instrument-panel aesthetic */
 .sim-lab{margin-top:30px;padding:26px;border-radius:18px;background:linear-gradient(135deg,#0b1924 0%,#07121b 60%,#0b2029 100%);border:1px solid #244754;box-shadow:0 28px 90px #0007}
 .sim-head{margin-bottom:22px}.sim-head h3{font-size:21px;letter-spacing:-.8px}.sim-head small{letter-spacing:2px}
-.sim-grid{gap:16px}.sim-card{padding:17px;background:linear-gradient(155deg,#0c1b26,#07121a);border-color:#294653;border-radius:13px;box-shadow:inset 0 1px #ffffff08}
+.sim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}.sim-card{min-width:0;padding:17px;background:linear-gradient(155deg,#0c1b26,#07121a);border:1px solid #294653;border-radius:13px;box-shadow:inset 0 1px #ffffff08}.sim-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.sim-head>div{min-width:0}.sim-head small{display:block;font:9px "DM Mono";color:var(--cyan);letter-spacing:2px}.sim-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.sim-card-top h4{margin:0;color:#dcebf0}.sim-state{white-space:nowrap;color:#a8c0ca}.sim-state.ok{color:var(--lime);border-color:#718d42;background:#142017}
 .sim-card h4{font-size:12px;letter-spacing:.2px}.sim-state{padding:6px 9px;border:1px solid #294552;border-radius:5px;background:#0a1b25;font-size:8px;letter-spacing:.8px}
-.sim-stage{height:260px;margin:15px 0 13px;border-radius:9px;border-color:#24434f;background:radial-gradient(ellipse at 50% 45%,#122a36 0%,#081720 72%);isolation:isolate}
+.sim-stage{position:relative;isolation:isolate;overflow:hidden;height:260px;margin:15px 0 13px;border:1px solid #24434f;border-radius:9px;background:radial-gradient(ellipse at 50% 45%,#122a36 0%,#081720 72%)}
 .sim-stage:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.3;background-image:linear-gradient(#29495755 1px,transparent 1px),linear-gradient(90deg,#29495755 1px,transparent 1px);background-size:26px 26px}
 .sim-stage:after{height:1px;bottom:30px;background:#416170;opacity:.5;border-radius:0}
 .sim-meta{font-size:8px;letter-spacing:.7px;text-transform:uppercase}
-.sim-progress{height:3px;margin:14px 0 12px;background:#1a303c}
+.sim-progress{height:4px;margin:14px 0 12px;background:#1a303c;border-radius:9px;overflow:hidden}.sim-progress i{display:block;width:0;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--cyan),var(--blue));box-shadow:0 0 12px #52f2dc77;transition:width .55s ease}.sim-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.sim-actions .sim-meta{color:#8faab5}.sim-btn{appearance:none;cursor:pointer;border:1px solid var(--cyan);background:linear-gradient(135deg,#52f2dc,#8bffe9);color:#06131a;font:800 9px Manrope,Arial,sans-serif;transition:transform .2s,box-shadow .2s,opacity .2s}.sim-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 7px 22px #52f2dc33}.sim-btn:disabled{cursor:wait;opacity:.68}.sim-log{margin-top:11px;padding:10px 11px;border:1px solid #1b3745;border-radius:7px;background:#06131b;line-height:1.7}.sim-foot{font:8px/1.8 "DM Mono";color:#718d99}
 .sim-btn{padding:10px 15px;border-radius:5px;font-size:9px;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 0 20px #52f2dc18}
 .sim-log{min-height:30px;color:#a9c2cb;font-size:9px}
 .sim-foot{margin-top:19px;padding-top:14px;border-top:1px solid #1d3742;letter-spacing:.3px}
@@ -118,7 +118,7 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
 @keyframes armUpper{50%{transform:rotate(5deg)}}@keyframes armLower{50%{transform:rotate(22deg)}}
 .mfg-status{position:absolute;bottom:9px;left:14px;right:14px;display:flex;justify-content:space-between;font:7px "DM Mono";color:#7895a3;letter-spacing:.8px}
 .mfg-status strong{color:#52f2dc;font-weight:400}
-@media(max-width:700px){.sim-lab{padding:16px}.sim-stage{height:230px}.sim-head h3{font-size:18px}}
+@media(max-width:700px){.sim-lab{padding:16px}.sim-grid{grid-template-columns:1fr}.sim-stage{height:230px}.sim-head{display:block}.sim-head>.pill{display:inline-block;margin-top:12px}.sim-card-top{align-items:flex-start;flex-wrap:wrap}.sim-head h3{font-size:18px}}
 </style>
 </head>
 <body>
