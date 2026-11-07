@@ -65,6 +65,29 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
 .sim-stage{position:relative;isolation:isolate;overflow:hidden;height:260px;margin:15px 0 13px;border:1px solid #24434f;border-radius:9px;background:radial-gradient(ellipse at 50% 45%,#122a36 0%,#081720 72%)}
 .sim-stage:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.3;background-image:linear-gradient(#29495755 1px,transparent 1px),linear-gradient(90deg,#29495755 1px,transparent 1px);background-size:26px 26px}
 .sim-stage:after{height:1px;bottom:30px;background:#416170;opacity:.5;border-radius:0}
+
+/* Photographic industrial scene layer */
+.sim-stage{height:300px;background:#06131a}
+.sim-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:brightness(.66) saturate(.78);transition:filter .5s,transform 5s ease}
+.sim-stage:hover .sim-photo{filter:brightness(.78) saturate(.9);transform:scale(1.025)}
+.sim-stage:before{z-index:1;opacity:.15;pointer-events:none}
+.sim-stage:after{z-index:3;left:0;right:0;bottom:0;height:42px;background:linear-gradient(transparent,#06131bd9);pointer-events:none}
+.wh-layout,.mfg-layout{display:none}
+.photo-hud{position:absolute;z-index:4;left:13px;right:13px;top:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:9px 11px;border:1px solid #b7d6dc44;border-radius:5px;background:#04131bc9;backdrop-filter:blur(8px);font:8px "DM Mono",monospace;letter-spacing:1px;color:#c2d8df}
+.photo-hud strong{color:#52f2dc;font-weight:600}
+.photo-hud small{color:#9bb3bd;font-size:7px}
+.photo-route{position:absolute;z-index:3;left:12%;right:13%;top:57%;height:2px;background:repeating-linear-gradient(90deg,#52f2dc 0 8px,transparent 8px 16px);filter:drop-shadow(0 0 5px #52f2dc);transform:rotate(-5deg);opacity:.9}
+.photo-route:after{content:"AGV ROUTE A4 → D2";position:absolute;right:0;top:-19px;padding:4px 7px;background:#04131be8;border:1px solid #52f2dc66;border-radius:3px;color:#a8fff1;font:7px "DM Mono"}
+.photo-scan{position:absolute;z-index:2;left:0;right:0;top:25%;height:1px;background:#52f2dcaa;box-shadow:0 0 18px 2px #52f2dc55;animation:photoScan 4.8s linear infinite;pointer-events:none}
+@keyframes photoScan{0%{top:25%;opacity:0}12%{opacity:.8}88%{opacity:.8}100%{top:85%;opacity:0}}
+.robot-photo{position:absolute;z-index:4;right:4%;bottom:9%;width:26%;height:48%;object-fit:cover;object-position:center;border:2px solid #52f2dcaa;border-radius:7px;box-shadow:0 12px 35px #000b;animation:robotFloat 3.5s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes robotFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
+.warehouse.running .photo-route{animation:routeTravel 2.8s linear infinite}
+@keyframes routeTravel{to{background-position:48px 0}}
+.production.running .robot-photo{animation:robotWork 1.2s ease-in-out infinite alternate}
+@keyframes robotWork{to{transform:translate(-8px,-10px) rotate(5deg)}}
+@media(max-width:700px){.sim-stage{height:245px}.photo-hud{align-items:flex-start;flex-direction:column;gap:5px}.robot-photo{width:30%;height:40%}}
+
 .sim-meta{font-size:8px;letter-spacing:.7px;text-transform:uppercase}
 .sim-progress{height:4px;margin:14px 0 12px;background:#1a303c;border-radius:9px;overflow:hidden}.sim-progress i{display:block;width:0;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--cyan),var(--blue));box-shadow:0 0 12px #52f2dc77;transition:width .55s ease}.sim-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.sim-actions .sim-meta{color:#8faab5}.sim-btn{appearance:none;cursor:pointer;border:1px solid var(--cyan);background:linear-gradient(135deg,#52f2dc,#8bffe9);color:#06131a;font:800 9px Manrope,Arial,sans-serif;transition:transform .2s,box-shadow .2s,opacity .2s}.sim-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 7px 22px #52f2dc33}.sim-btn:disabled{cursor:wait;opacity:.68}.sim-log{margin-top:11px;padding:10px 11px;border:1px solid #1b3745;border-radius:7px;background:#06131b;line-height:1.7}.sim-foot{font:8px/1.8 "DM Mono";color:#718d99}
 .sim-btn{padding:10px 15px;border-radius:5px;font-size:9px;letter-spacing:.5px;text-transform:uppercase;box-shadow:0 0 20px #52f2dc18}
@@ -154,14 +177,14 @@ footer{border-top:1px solid #1b3443;padding:28px 0 36px;color:#8098a4;font-size:
  <div class="sim-grid">
   <article class="sim-card">
    <div class="sim-card-top"><h4>01 / Warehouse transfer</h4><span class="sim-state" id="warehouseState">READY · WH/Stock</span></div>
-   <div class="sim-stage warehouse" id="warehouseStage"><div class="wh-layout"><div class="wh-label">DISTRIBUTION CENTER / ZONE A</div><div class="wh-location">AISLE 04 · DOCK 02</div><div class="wh-rack"><span></span><b></b></div><div class="wh-dock"></div><div class="wh-route"></div><div class="wh-beacon"></div><div class="agv"><i></i><i></i></div><div class="wh-readout">FLEET STATUS <strong>● ONLINE</strong>　 ROUTE A4 → D2</div></div></div>
+   <div class="sim-stage warehouse" id="warehouseStage"><img class="sim-photo" src="https://images.pexels.com/photos/36398150/pexels-photo-36398150/free-photo-of-gudang-industri-dengan-forklift-dan-rak.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Real industrial warehouse with forklift and pallet racks" loading="lazy"><div class="photo-hud"><span>WAREHOUSE / LIVE FLOOR</span><strong>FORKLIFT · PALLET TRANSFER</strong><small>PHOTO REFERENCE · DIGITAL ROUTE OVERLAY</small></div><div class="photo-route"></div><div class="photo-scan"></div><div class="wh-layout"><div class="wh-label">DISTRIBUTION CENTER / ZONE A</div><div class="wh-location">AISLE 04 · DOCK 02</div><div class="wh-rack"><span></span><b></b></div><div class="wh-dock"></div><div class="wh-route"></div><div class="wh-beacon"></div><div class="agv"><i></i><i></i></div><div class="wh-readout">FLEET STATUS <strong>● ONLINE</strong>　 ROUTE A4 → D2</div></div></div>
    <div class="sim-meta"><span>WH/Stock</span><span>→</span><span>WH/Output</span></div><div class="sim-progress"><i id="warehouseProgress"></i></div>
    <div class="sim-actions"><button class="sim-btn" id="warehouseRun">▶ Run transfer</button><span class="sim-meta" id="warehouseQty">1 pallet · 24 units</span></div>
    <div class="sim-log" id="warehouseLog" aria-live="polite">Odoo: Internal Transfer created. Menunggu eksekusi.</div>
   </article>
   <article class="sim-card">
    <div class="sim-card-top"><h4>02 / Manufacturing order</h4><span class="sim-state" id="productionState">READY · MO/00042</span></div>
-   <div class="sim-stage production" id="productionStage"><div class="mfg-layout"><div class="mfg-topline"><span>SHOPFLOOR / LINE 04</span><span>WORKCENTER CNC-04</span></div><div class="mfg-machine"><div class="mfg-window"></div><div class="mfg-base"></div></div><div class="mfg-arm"></div><div class="mfg-conveyor"></div><div class="mfg-part"></div><div class="mfg-status"><span>SPINDLE <strong>● READY</strong></span><span>QUALITY GATE <strong>ACTIVE</strong></span></div></div></div>
+   <div class="sim-stage production" id="productionStage"><img class="sim-photo" src="https://images.pexels.com/photos/39013531/pexels-photo-39013531/free-photo-of-industrial-cnc-machine-in-factory-setting.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Real CNC machine in an industrial factory" loading="lazy"><img class="robot-photo" src="https://images.pexels.com/photos/34207359/pexels-photo-34207359/free-photo-of-industrial-robot-arm-in-a-manufacturing-facility.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Industrial robotic arm" loading="lazy"><div class="photo-hud"><span>SHOPFLOOR / CNC CELL 04</span><strong>CNC MACHINING · ROBOTIC HANDLING</strong><small>PHOTO REFERENCE · CYCLE STATUS OVERLAY</small></div><div class="photo-scan"></div><div class="mfg-layout"><div class="mfg-topline"><span>SHOPFLOOR / LINE 04</span><span>WORKCENTER CNC-04</span></div><div class="mfg-machine"><div class="mfg-window"></div><div class="mfg-base"></div></div><div class="mfg-arm"></div><div class="mfg-conveyor"></div><div class="mfg-part"></div><div class="mfg-status"><span>SPINDLE <strong>● READY</strong></span><span>QUALITY GATE <strong>ACTIVE</strong></span></div></div></div>
    <div class="sim-meta"><span>RAW MATERIAL</span><span>→</span><span>FINISHED GOODS</span></div><div class="sim-progress"><i id="productionProgress"></i></div>
    <div class="sim-actions"><button class="sim-btn" id="productionRun">▶ Start production</button><span class="sim-meta" id="productionQty">0 / 10 units</span></div>
    <div class="sim-log" id="productionLog" aria-live="polite">Odoo: Work order confirmed. Menunggu start.</div>
